@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MeshTransmissionMaterial, useGLTF, Text } from "@react-three/drei";
 import { useFrame, useThree } from '@react-three/fiber'
 import { useControls } from 'leva'
@@ -8,6 +8,18 @@ export default function Model() {
     const { nodes } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/medias/glass_chair.glb`);
     const { viewport } = useThree()
     const torus = useRef(null);
+    const title = 'abandoned chairs';
+    const [visibleCharacters, setVisibleCharacters] = useState(0);
+
+    useEffect(() => {
+        let count = 0;
+        const timer = setInterval(() => {
+            count += 1;
+            setVisibleCharacters(count);
+            if (count >= title.length) clearInterval(timer);
+        }, 100);
+        return () => clearInterval(timer);
+    }, []);
     
     useFrame( () => {
         torus.current.rotation.x += 0.02
@@ -28,7 +40,10 @@ export default function Model() {
     return (
         <group scale={viewport.width / 15} >
             <Text font={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Barrio-Regular.ttf`} position={[0, 0, -1]} fontSize={1.0} color="#5b56d6" anchorX="center" anchorY="middle">
-                The Abandoned Chairs
+                {title.slice(0, visibleCharacters)}
+            </Text>
+            <Text font={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/fonts/PPNeueMontreal-Bold.otf`} position={[0, -2.3, 0]} fontSize={0.28} color="#5b56d6" anchorX="center" anchorY="middle">
+                click on the chairs to continue
             </Text>
             <mesh
   ref={torus}
