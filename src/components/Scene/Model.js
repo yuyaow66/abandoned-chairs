@@ -42,7 +42,7 @@ export default function Model() {
             <Text font={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Barrio-Regular.ttf`} position={[0, 0, -1]} fontSize={1.0} color="#5b56d6" anchorX="center" anchorY="middle">
                 {title.slice(0, visibleCharacters)}
             </Text>
-            <Text font={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/fonts/PPNeueMontreal-Bold.otf`} position={[0, -2.3, 0]} fontSize={0.28} color="#ffffff" outlineWidth={0.012} outlineColor="#26224d" anchorX="center" anchorY="middle">
+            <Text font={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/fonts/PPNeueMontreal-Bold.otf`} position={[0, -2.3, 0]} fontSize={0.28} color="#ffffff" anchorX="center" anchorY="middle">
                 click on the chair to continue
             </Text>
             <mesh
